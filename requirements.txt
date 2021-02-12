@@ -1,5 +1,1 @@
-#nose
-#sphinx
-# geopy  # by default though?
-numpy
-pandas
+requests==2.25.1

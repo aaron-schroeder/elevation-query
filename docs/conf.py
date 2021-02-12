@@ -17,8 +17,8 @@ sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Project information -----------------------------------------------------
-from distance import __version__
-project = 'py-distance'
+from query import __version__
+project = 'elevation-query'
 copyright = '2021, Aaron Schroeder'
 author = 'Aaron Schroeder'
 

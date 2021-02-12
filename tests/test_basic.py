@@ -1,38 +1,79 @@
 # -*- coding: utf-8 -*-
 
-import distance
+import query
 
 import unittest
-
-import pandas as pd
-import numpy as np
-
-#import heartandsole.algorithms as algs
 
 
 class TestAlgorithms(unittest.TestCase):
 
-  def test_displacement(self):
-    """Test out my distance algorithm with hand calcs.
+  def setUp(self):
+    # Generate some BS coordinates that are in the range of all
+    # elevation services.
+    self.latlons = [
+      (40.03488860164351, -105.27230724626),
+      (40.03498860164351, -105.27230724626),
+      (40.03508860164351, -105.27230724626),
+      (40.03518860164351, -105.27230724626),
+      (40.03528860164351, -105.27230724626),
+      (40.03538860164351, -105.27230724626),
+      (40.03548860164351, -105.27230724626),
+      (40.03558860164351, -105.27230724626),
+      (40.03568860164351, -105.27230724626),
+      (40.03578860164351, -105.27230724626)
+    ]
 
-    TODO: Figure out how to just test the distance algorithm, without
-          summoning a real series. OR, I could just break unittest
-          guidelines and leave the test as-is. I was originally thinking
-          of having a whole box of algorithms that I test. And that may
-          happen one day. But for now, let us make it easy.
-    """
-    lon = pd.Series([0.0, 0.0, 0.0])
-    lon_ew = pd.Series([0.0, 1.0, 2.0])
-    lat = pd.Series([0.0, 0.0, 0.0])
-    lat_ns = pd.Series([0.0, 1.0, 2.0])
+  def test_epqs(self):
+    """Functional test for National Map EPQS."""
+    elevs = query.national_map_epqs(self.latlons)
+    
+    # print('epqs')
+    # print(elevs)
 
-    disp_ew = distance.spherical_earth_plane_displacement(lat, lon_ew)
-    self.assertIsInstance(disp_ew, pd.Series)
-    self.assertAlmostEqual(disp_ew.iloc[-1], 6371000 * 1.0 * np.pi / 180)
+    self.assertIsInstance(elevs, list)
 
-    disp_ns = distance.spherical_earth_plane_displacement(lat_ns, lon)
-    self.assertIsInstance(disp_ns, pd.Series)
-    self.assertAlmostEqual(disp_ns.iloc[-1], 6371000 * 1.0 * np.pi / 180)
+  @unittest.skip(
+   'This test only works on my local machine because it makes use of '
+   'a file over here. WIP.'
+  )
+  def test_1m(self):
+    """Functional test for National Map 1m file."""
+    
+    # I am not including this dataset for now - it is huge.
+    # Maybe at some point.
+    elevation_fname = 'data/all.tif'
+    
+    elevs = query.national_map_1m(self.latlons, elevation_fname)
+    
+    # print('1m')
+    # print(elevs)
+
+    self.assertIsInstance(elevs, list)
+
+  @unittest.skip('open-elevation works, but it is sloooow.')
+  def test_open_elevation(self):
+    elevs = query.open_elevation(self.latlons)
+    
+    # print('open_elevation')
+    # print(elevs)
+    
+    self.assertIsInstance(elevs, list)
+
+  def test_google_maps(self):
+    # Note: Running this test requires a user-maintained `config.py`
+    # file containing their gmaps key as a string.
+    from config import user_gmaps_key
+
+    # Generate enough latlons that the request needs to be broken
+    # up into chunks.
+    latlons = [[40.0, -105.0]] * 10000
+
+    elevs = query.google(latlons, user_gmaps_key)
+
+    # print('google maps')
+    # print(elevs)
+
+    self.assertIsInstance(elevs, list)
 
 
 if __name__ == '__main__':

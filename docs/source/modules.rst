@@ -1,7 +1,7 @@
-distance
-========
+query
+=====
 
 .. toctree::
    :maxdepth: 4
 
-   distance
+   query

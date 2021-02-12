@@ -4,6 +4,10 @@ import os
 from setuptools import setup, find_packages
 
 
+# Could this be outsourced somehow? find_packages maybe?
+pkg_name = 'elevation-query'
+
+
 def read(rel_path):
   """Read a file so python does not have to import it.
   
@@ -29,28 +33,56 @@ def get_version(rel_path):
   raise RuntimeError('Unable to find version string.')
 
 
-with open('README.rst') as f:
+with open('README.md') as f:
   readme = f.read()
 
 with open('LICENSE') as f:
   license = f.read()
 
-# Could this be outsourced somehow? find_packages maybe?
-pkg_name = 'distance'
-
 setup(
   name=pkg_name,
   version=get_version('%s/__init__.py' % pkg_name),
-  description='description placeholder',
+  description='Python library for getting elevation data from GPS coordinates',
   long_description=readme,
+  long_description_content_type='text/markdown',
   author='Aaron Schroeder',
-  #author_email='me@kennethreitz.com',
+  #author_email='',
   install_requires = [
-    'numpy',
-    'pandas',
+    'requests>=2.25.1',
   ],
-  url='https://github.com/aaron-schroeder/py-distance',
+  extras_require={
+    'local': ['rasterio==1.1.8', 'pyproj==3.0.0', 'numpy>=1.15',],
+    'google', ['googlemaps>=3.0', 'numpy>=1.15',],
+  },
+  url='https://github.com/aaron-schroeder/elevation-query',
   license=license,
   packages=find_packages(exclude=('tests', 'docs'))
+  classifiers=[
+    #'Programming Language :: Python :: 3.6',
+    'License :: OSI Approved :: MIT License',
+  ],
 )
 
+
+# Spatialfriend stuff
+# requirements = ['geopy>=1.20.0', 'googlemaps>=3.0', 'numpy>=1.14',
+#                 'pandas>=0.24', 'scipy>=1.1']
+
+# setup(name='spatialfriend',
+#       version='0.0.11',
+#       author='Aaron Schroeder',
+#       author_email='aaron@trailzealot.com',
+#       description='Python library for calculating geospatial data'  \
+#                 + ' from gps coordinates.',
+#       long_description=readme,
+#       long_description_content_type='text/markdown',
+#       url='https://github.com/aaron-schroeder/spatialfriend',
+#       packages=['spatialfriend'],
+#       install_requires=requirements,
+#       extras_require={
+#         'local': ['rasterio==1.1.8', pyproj==3.0.0, 'numpy>=1.15',],
+#         'google', ['googlemaps>=3.0']
+#       },
+#       license='MIT License',
+#       classifiers=['Programming Language :: Python :: 3.6',
+#                    'License :: OSI Approved :: MIT License',],)
