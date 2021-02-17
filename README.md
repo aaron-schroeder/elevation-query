@@ -15,8 +15,7 @@
   - [Extra: Elevation values from Google Maps API](#extra-elevaton-values-from-google-maps-api)
   - [Extra: Elevation values from `.img` and `.geotiff` files](#extra-elevation-values-from-img-and-geotiff-files)
   - [Possible future data sources](#possible-future-data-sources)
-- [Example](#example)
-- [Project Status](#project-status)
+- [Example](#example) <!-- - [Project Status](#project-status) -->
 - [Contact](#contact)
 - [License](#license)
 
@@ -146,7 +145,7 @@ pip install -e ${local_path_to_elevation-query_dir}[google]
 
 `elevation-query` allows querying of user-owned `.img` and `.geotiff` files
 that contain elevation data. Such files are available from 
-[the National Map's download page](https://viewer.nationalmap.gov/basic/).
+[the National Map's download page](https://apps.nationalmap.gov/downloader).
 
 :warning: Note :warning: this package extra requires [`rasterio`](https://rasterio.readthedocs.io/en/latest/)
 and [`pyproj`](https://pyproj4.github.io/pyproj/stable/), which
@@ -204,13 +203,24 @@ elevs_oe = query.open_elevation(latlons)
 
 # Make sure your latlons are within the horizontal bounds of your
 # elevation data files first!
-elevs_1m = query.national_map_1m(latlons)
+elevs_1m = query.national_map_1m(latlons, 'data.tif')  # .img files work too
 
 # Need your own gmaps API key. Be careful and keep it
 # from being visible on the web.
 from config import user_gmaps_key
 elevs_google = query.google(latlons, user_gmaps_key)
 ```
+
+---
+
+## Project Status
+
+Good to go. Not sure if I feel like it makes sense to put on PyPi though.
+
+### Future Work
+
+ - Generate series of GPS points to compare elevation datasets with each other,
+   and test the effect of smoothing with `py-elevation` algorithms.
 
 ---
 
