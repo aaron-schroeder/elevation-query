@@ -4,8 +4,7 @@ import os
 from setuptools import setup, find_packages
 
 
-# Could this be outsourced somehow? find_packages maybe?
-pkg_name = 'elevation-query'
+pkg_name = 'query'
 
 
 def read(rel_path):
@@ -52,11 +51,11 @@ setup(
   ],
   extras_require={
     'local': ['rasterio==1.1.8', 'pyproj==3.0.0', 'numpy>=1.15',],
-    'google', ['googlemaps>=3.0', 'numpy>=1.15',],
+    'google': ['googlemaps>=3.0', 'numpy>=1.15',],
   },
   url='https://github.com/aaron-schroeder/elevation-query',
   license=license,
-  packages=find_packages(exclude=('tests', 'docs'))
+  packages=find_packages(exclude=('tests', 'docs')),
   classifiers=[
     #'Programming Language :: Python :: 3.6',
     'License :: OSI Approved :: MIT License',
