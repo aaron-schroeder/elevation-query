@@ -78,7 +78,7 @@ that gully. That's where we need to smooth out your series of elevation coordina
 out silly elevation gains and losses along your route. Or we could correct your horizontal
 position to a known trail (a process called map-matching), and then look up your elevation
 coordinates. I am currently working on 
-[correcting your improbable elevation time series](https://github.com/aaron-schroeder/py-elevation)
+[correcting your improbable elevation time series](https://github.com/aaron-schroeder/pandas-xyz)
 ("NO I did NOT fall down in the valley for five seconds before climbing back up a sheer cliff"),
 and I hope to improve [my map-matching algorithm](https://github.com/aaron-schroeder/mapmatching) 
 so you can snap your coordinates back to a real trail.
@@ -220,19 +220,19 @@ Good to go. Not sure if I feel like it makes sense to put on PyPi though.
 ### Future Work
 
  - Generate series of GPS points to compare elevation datasets with each other,
-   and test the effect of smoothing with `py-elevation` algorithms.
+   and test the effect of smoothing with `pandas-xyz` algorithms.
 
 ---
 
 ## Contact
 
-You can get in touch with me at the following places:
+Reach out to me at one of the following places!
 
-<!-- - Website: <a href="https://trailzealot.com" target="_blank">trailzealot.com</a>-->
-- GitHub: <a href="https://github.com/aaron-schroeder" target="_blank">github.com/aaron-schroeder</a>
-- LinkedIn: <a href="https://www.linkedin.com/in/aarondschroeder/" target="_blank">linkedin.com/in/aarondschroeder</a>
-- Twitter: <a href="https://twitter.com/trailzealot" target="_blank">@trailzealot</a>
-- Instagram: <a href="https://instagram.com/trailzealot" target="_blank">@trailzealot</a>
+- Website: [trailzealot.com](https://trailzealot.com)
+- LinkedIn: [linkedin.com/in/aarondschroeder](https://www.linkedin.com/in/aarondschroeder/)
+- Twitter: [@trailzealot](https://twitter.com/trailzealot)
+- Instagram: [@trailzealot](https://instagram.com/trailzealot)
+- GitHub: [github.com/aaron-schroeder](https://github.com/aaron-schroeder)
 
 ---
 
